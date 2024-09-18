@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 
+
+
 const HomeScreen = ({ navigation }) => {
   const API_URL = 'https://localhost:3000/events';
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -58,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
         style={styles.addButton}
         onPress={() => navigation.navigate('Formulario')} 
       >
-        <Text style={styles.addButtonText}>Cargar nuevo evento</Text>
+        
       </TouchableOpacity>
 
       <FlatList

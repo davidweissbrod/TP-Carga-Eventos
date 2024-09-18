@@ -9,6 +9,25 @@ const RegisterScreen = ({ navigation }) =>{
     const [username, onChangeUsername] = useState('');
     const [pass, onChangeTextPass] = useState('');
 
+    useEffect(() => {
+      const fetchEvents = async () => {
+        try {
+          const response = await fetch(urlRegister);
+          if (!response.ok) {
+            throw new Error('Error al Registrarse');
+          }
+          const data = await response.json();
+          setEvents(data);
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchEvents();
+    }, []);
+
     const handleRegister = async () => {
       try {
         const response = await axios.post(urlRegister, { first_name, last_name, username, password });

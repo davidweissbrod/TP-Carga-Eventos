@@ -31,7 +31,6 @@ const FormularioScreen = ({ navigation }) => {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
 
   useEffect(() => {
-    // Función para obtener las categorías
     const fetchCategories = async () => {
       try {
         const response = await fetch(CATEGORIES_API_URL);
@@ -39,11 +38,11 @@ const FormularioScreen = ({ navigation }) => {
         const data = await response.json();
         setCategories(data);
       } catch (error) {
-        Alert.alert('Error', error.message);
+        Alert.alert('Error', error);
       }
     };
 
-    // Función para obtener las ubicaciones
+   
     const fetchLocations = async () => {
       try {
         const response = await fetch(LOCATIONS_API_URL);
@@ -51,7 +50,7 @@ const FormularioScreen = ({ navigation }) => {
         const data = await response.json();
         setLocations(data);
       } catch (error) {
-        Alert.alert('Error', error.message);
+        Alert.alert('Error', error);
       }
     };
 
@@ -59,9 +58,9 @@ const FormularioScreen = ({ navigation }) => {
     fetchLocations();
   }, []);
 
-  // Función para manejar el envío del formulario
+
   const handleSubmit = () => {
-    // Validaciones simples
+  
     if (!name || !description || !category || !location || !startDate || !duration || !price || !maxAssistance) {
       Alert.alert('Error', 'Por favor complete todos los campos.');
       return;
@@ -70,7 +69,7 @@ const FormularioScreen = ({ navigation }) => {
     setConfirmModalVisible(true);
   };
 
-  // Función para confirmar la publicación del evento
+
   const handleConfirm = async () => {
     const eventData = {
       name,
@@ -81,9 +80,9 @@ const FormularioScreen = ({ navigation }) => {
       duration_in_minutes: parseInt(duration),
       price: parseInt(price),
       max_assistance: parseInt(maxAssistance),
-      enabled_for_enrollment: true, // Ajusta según tu lógica
-      id_creator_user: 1, // Reemplaza con el ID real del creador del evento
-      tags: [], // Ajusta según tu lógica
+      enabled_for_enrollment: true, 
+      id_creator_user: 1, 
+      tags: [], 
     };
 
     try {
@@ -172,7 +171,6 @@ const FormularioScreen = ({ navigation }) => {
 
       <Button title="Guardar Evento" onPress={handleSubmit} />
 
-      {/* Modal de Confirmación */}
       <Modal
         transparent={true}
         visible={confirmModalVisible}
